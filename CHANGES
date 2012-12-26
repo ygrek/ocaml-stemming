@@ -1,0 +1,7 @@
+0.1.1
+2009/12/21
+  Ensure result string is always in lowercase
+
+0.1.0
+2009/11/18
+  Wrappers for Porter2 english stemmer (http://snowball.tartarus.org/otherlangs/english_c.txt)

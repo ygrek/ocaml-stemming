@@ -1,0 +1,6 @@
+name="stemming"
+version="0.1.1"
+description="stemmer library"
+requires=""
+archive(byte)="stemming.cma"
+archive(native)="stemming.cmxa"
