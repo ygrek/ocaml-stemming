@@ -10,11 +10,22 @@
 
 #include "porter2_c.h"
 
+typedef struct stemmer_t {
+  struct stemmer *st;
+  char *buf;
+  size_t len;
+} stemmer_t;
+
 CAMLprim value caml_porter2_create(value v_unit)
 {
   CAMLparam1(v_unit);
-  struct stemmer* st = create_stemmer();
-  CAMLreturn((value)st);
+  stemmer_t *val = malloc(sizeof(stemmer_t));
+  memset((void*)val, 0, sizeof(stemmer_t));
+  val->st = create_stemmer();
+  val->buf = malloc(32);
+  val->len = 32;
+  memset((void*)val->buf,0,32);
+  CAMLreturn((value)val);
 }
 
 CAMLprim value caml_porter2_stem(value v_stem, value v_str)
@@ -22,23 +33,31 @@ CAMLprim value caml_porter2_stem(value v_stem, value v_str)
   CAMLparam2(v_stem,v_str);
   CAMLlocal1(v_res);
 
-  char* word = strdup(String_val(v_str));
-  const int len = strlen(word);
-  int i;
-
-  if (NULL == word || 0 == len)
-  {
-    free(word);
-    CAMLreturn(caml_copy_string(""));
+  stemmer_t* val = (stemmer_t*)v_stem;
+  size_t i, len = caml_string_length(v_str);
+  if(len >= val->len){
+    val->len = len + 1; // to put trailing zero securely
+    val->buf = realloc(val->buf, val->len);
   }
-  if (len < 3) /* short words are not lowercased by stem() */
-    for (i = 0; i < len; i++) word[i]=tolower(word[i]);
-  int count = stem((struct stemmer*)v_stem, word, len - 1);
+  
+  len = 0;
+  char *word = val->buf, *d = val->buf, *s = String_val(v_str);
+  // This is much more beautiful and optimistic, but generates ugly
+  // warnings. Sad.
+  //while(*d++ = *s++) i++ ;
+  while(*s && (len < val->len)){ *d = *s; d++; s++; len++; }
+  if(0 == len) CAMLreturn(caml_copy_string(""));
 
-  /* consider 'singly' */
-  word[count+1] = '\0';
+  // short words are not lowercased by stem()
+  if (len < 3){
+    word[0] = tolower(word[0]);
+    word[1] = tolower(word[1]);
+  }
+
+  i = stem(val->st, word, len-1);
+
+  word[i+1] = '\0';
   v_res = caml_copy_string(word);
-  free(word);
 
   CAMLreturn(v_res);
 }
@@ -46,7 +65,10 @@ CAMLprim value caml_porter2_stem(value v_stem, value v_str)
 CAMLprim value caml_porter2_finish(value v_stem)
 {
   CAMLparam1(v_stem);
-  free_stemmer((struct stemmer*)v_stem);
+  struct stemmer_t* val = (struct stemmer_t*)v_stem;
+  free_stemmer(val->st);
+  free(val->buf);
+  free(val);
   CAMLreturn(Val_unit);
 }
 
