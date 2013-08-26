@@ -1,5 +1,5 @@
 (* OASIS_START *)
-(* DO NOT EDIT (digest: 97d11afdfcf9c27214dc195a24c81c1b) *)
+(* DO NOT EDIT (digest: c7766591692cfa896022e4fee1c5f50a) *)
 module OASISGettext = struct
 (* # 21 "src/oasis/OASISGettext.ml" *)
 
@@ -478,7 +478,19 @@ open Ocamlbuild_plugin;;
 let package_default =
   {
      MyOCamlbuildBase.lib_ocaml = [("stemming", ["src"])];
-     lib_c = [("stemming", "src", ["src/porter2_c.h"])];
+     lib_c =
+       [
+          ("stemming",
+            "src",
+            [
+               "src/porter2_c.h";
+               "src/fuzzyrus.h";
+               "src/fuzzyrus_inc.h";
+               "src/fuzzyukr.h";
+               "src/fuzzyukr_inc.h";
+               "src/keva_stemmers.h"
+            ])
+       ];
      flags = [];
      includes = [];
      }
@@ -486,6 +498,6 @@ let package_default =
 
 let dispatch_default = MyOCamlbuildBase.dispatch_default package_default;;
 
-# 490 "myocamlbuild.ml"
+# 502 "myocamlbuild.ml"
 (* OASIS_STOP *)
 Ocamlbuild_plugin.dispatch dispatch_default;;

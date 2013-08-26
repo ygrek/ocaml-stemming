@@ -16,7 +16,7 @@ typedef struct stemmer_t {
   size_t len;
 } stemmer_t;
 
-CAMLprim value caml_porter2_create(value v_unit)
+CAMLprim value caml_stemmer_porter2_init(value v_unit)
 {
   CAMLparam1(v_unit);
   stemmer_t *val = malloc(sizeof(stemmer_t));
@@ -28,7 +28,7 @@ CAMLprim value caml_porter2_create(value v_unit)
   CAMLreturn((value)val);
 }
 
-CAMLprim value caml_porter2_stem(value v_stem, value v_str)
+CAMLprim value caml_stemmer_porter2_stem(value v_stem, value v_str)
 {
   CAMLparam2(v_stem,v_str);
   CAMLlocal1(v_res);
@@ -62,7 +62,7 @@ CAMLprim value caml_porter2_stem(value v_stem, value v_str)
   CAMLreturn(v_res);
 }
 
-CAMLprim value caml_porter2_finish(value v_stem)
+CAMLprim value caml_stemmer_porter2_close(value v_stem)
 {
   CAMLparam1(v_stem);
   struct stemmer_t* val = (struct stemmer_t*)v_stem;
@@ -71,4 +71,3 @@ CAMLprim value caml_porter2_finish(value v_stem)
   free(val);
   CAMLreturn(Val_unit);
 }
-

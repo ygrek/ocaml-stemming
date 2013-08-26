@@ -2,19 +2,23 @@ OASISFormat:  0.3
 Name:         stemming
 Version:      0.2.0
 License:      LGPL-2.1 with OCaml linking exception
-Authors:      ygrek
-Copyrights:   (C) 2009 ygrek
+Authors:      ygrek, Mykola Stryebkov
+Copyrights:   (C) 2009 ygrek, (C) 2013 Mykola Stryebkov
 Homepage:     https://github.com/ygrek/ocaml-stemming
 BuildTools:   ocamlbuild
 Plugins:      DevFiles (0.3), META (0.3)
 
 Synopsis: Stemming wrappers
-Description: none
+Description:
+  Wrappers for stemming algorithms, namely: Porter2 (English) and Keva (Russian and Ukrainian).
 
 Library stemming
   Path: src
   Modules: Stemmer
-  CSources: porter2_c.c, porter2_c.h, porter2_stubs.c
+  CSources: porter2_c.c, porter2_c.h, porter2_stubs.c,
+    fuzzyrus.c, fuzzyrus.h, fuzzyrus_inc.h,
+    fuzzyukr.c, fuzzyukr.h, fuzzyukr_inc.h,
+    keva_stemmers.c, keva_stemmers.h, keva_stubs.c
 
 Document api
   Title: API reference for ocaml-stemming
