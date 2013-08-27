@@ -1,3 +1,8 @@
+0.2.0
+2013/08/28
+  Switch to OASIS
+  Add Keva stemmer for Russian and Ukrainian languages (by Mykola Stryebkov)
+
 0.1.1
 2009/12/21
   Ensure result string is always in lowercase

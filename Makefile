@@ -36,3 +36,12 @@ setup.data:
 .PHONY: build doc test all install uninstall reinstall clean distclean configure
 
 # OASIS_STOP
+
+VERSION=$(shell oasis query version)
+NAME=ocaml-stemming-$(VERSION)
+
+.PHONY: release
+release:
+	git tag -a -m $(VERSION) v$(VERSION)
+	git archive --prefix=$(NAME)/ v$(VERSION) | gzip > $(NAME).tar.gz
+	gpg -a -b $(NAME).tar.gz
