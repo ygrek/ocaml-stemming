@@ -1,7 +1,6 @@
 
-#include <stdio.h>  /* for malloc, free */
-
 #include <stdlib.h>  /* for malloc, free */
+#include <ctype.h>   /* for tolower */
 #include <string.h>  /* for memcmp, memmove */
 
 /*  A direct encoding of the English (Porter2) stemmer defined at
