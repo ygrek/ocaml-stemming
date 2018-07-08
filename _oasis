@@ -1,6 +1,6 @@
 OASISFormat:  0.4
 Name:         stemming
-Version:      0.2.0
+Version:      0.2.1
 License:      LGPL-2.1 with OCaml linking exception
 Authors:      ygrek, Mykola Stryebkov
 Copyrights:   (C) 2009 ygrek, (C) 2013 Mykola Stryebkov

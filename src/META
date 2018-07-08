@@ -1,6 +1,6 @@
 # OASIS_START
-# DO NOT EDIT (digest: 7b26232434b217e0c96056b8dc2e94b8)
-version = "0.2.0"
+# DO NOT EDIT (digest: f2d51da28e554a45343843c2d58791b9)
+version = "0.2.1"
 description = "Stemming wrappers"
 archive(byte) = "stemming.cma"
 archive(byte, plugin) = "stemming.cma"
