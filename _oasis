@@ -1,4 +1,4 @@
-OASISFormat:  0.3
+OASISFormat:  0.4
 Name:         stemming
 Version:      0.2.0
 License:      LGPL-2.1 with OCaml linking exception
@@ -6,7 +6,7 @@ Authors:      ygrek, Mykola Stryebkov
 Copyrights:   (C) 2009 ygrek, (C) 2013 Mykola Stryebkov
 Homepage:     https://github.com/ygrek/ocaml-stemming
 BuildTools:   ocamlbuild
-Plugins:      DevFiles (0.3), META (0.3)
+Plugins:      DevFiles (0.4), META (0.4)
 
 Synopsis: Stemming wrappers
 Description:
@@ -22,7 +22,7 @@ Library stemming
 
 Document api
   Title: API reference for ocaml-stemming
-  Type: ocamlbuild (0.3)
+  Type: ocamlbuild (0.4)
   Authors: ygrek
   BuildTools: ocamldoc
   Format: HTML
